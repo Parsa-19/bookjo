@@ -73,9 +73,9 @@ if __name__ == '__main__':
 	navScraper = navigationListCrawler()
 	
 	# execute
-	final_li_links = navScraper.extract_li_links(target_website) # returns some structure like:
-	'''
-	final_li_links = [ 			
+	# final_li_links = navScraper.extract_li_links(target_website) # returns some structure like:
+	
+	final_li_links = [ 	# imagine each level of list as li tag and each number as category_link  		
 		[ 		
 			[	
 				'<3>', 
@@ -116,6 +116,6 @@ if __name__ == '__main__':
 		'<1>', 
 		'<1>'  
 	]
-	'''
-	# display_li_links_resault(final_li_links)
+	
+	display_li_links_resault(final_li_links)
 	
