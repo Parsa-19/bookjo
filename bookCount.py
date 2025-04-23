@@ -29,56 +29,93 @@ class navigationListCrawler(web):
 		print(i)
 
 
-'''
-structure
 
-li links = 
-[
-	li-href = 
-	[
-		li_href = 
-		[
-			li_href,
-			li_href,
-		],
 
-		li_href = 
-		[
-			li_href,
-			li_href,
-		],
 
-		li_href,
-		li_href
-	],
 
-	li-href = 
-	[
-		li_href,
-		li_href,
-		li_href,
-	],
 
-	li-href,
-	li-href,
-	li-href,
-]
-'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def display_li_links_resault(final_nested_li_links):
+
+	def return_top_level_item(dedicated_level_of_links): # links that are in same level of being nested
+		if not isinstance(dedicated_level_of_links, list):
+			a_link = dedicated_level_of_links
+			print(a_link)
+			return a_link
+
+		list(map(return_top_level_item, dedicated_level_of_links))
+
+	flatted_list = []
+	flatted_list = list(map(return_top_level_item, final_nested_li_links))
 	
-
-
-
+	
+	
 if __name__ == '__main__':
-	requ_maker = web()
-	scraper = navigationListCrawler()
 
+	# base variables
 	target_website = 'https://www.paytakhteketab.com/'
-	resp = requ_maker.make_request(target_website)
+	final_li_links = []
 
-	soup = BeautifulSoup(resp.content, 'html.parser')
-	menu_tag = soup.find('nav', {'id': 'menu'})
+	# initial instance_vars
+	navScraper = navigationListCrawler()
+	
+	# execute
+	final_li_links = navScraper.extract_li_links(target_website) # returns some structure like:
+	'''
+	final_li_links = [ 			
+		[ 		
+			[	
+				'<3>', 
+				'<3>'
+			], 
+			[
+				'<3>',
+				'<3>'
+			], 
+			[
+				'<3>', 
+				'<3>'
+			], 
 
-	scraper.extract_li_links(menu_tag)
-	# token = 'hello'
-	# no_longer_at_risk = soup.find('ul', class_="mm-spn--open").find_next('ul').find_all('li')
-	# print(no_longer_at_risk)
+			'<2>',
+			'<2>'
+		],
+
+		[
+			[
+				'<3>', 
+				'<3>'
+			],
+			[
+				'<3>',
+				'<3>'
+			]
+		],
+
+		[ 
+			'<2>',
+			'<2>',
+			'<2>' 
+		],  
+
+		'<1>', 
+		'<1>',  
+		'<1>', 
+		'<1>'  
+	]
+	'''
+	# display_li_links_resault(final_li_links)
+	
